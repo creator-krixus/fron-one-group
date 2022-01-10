@@ -112,13 +112,12 @@
 
 .contenedor{
   margin: 0;
-  padding: 0;
+  padding: 3%;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin-top: 3%;
 
   &__registro{
     padding: 2%;

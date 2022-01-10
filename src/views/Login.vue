@@ -61,7 +61,6 @@
         this.usuario.email= '',
         this.usuario.password= ''
       }
-      
     }
   }
 </script>
@@ -74,7 +73,6 @@
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 10%;
-    background: lightcyan;
 
     &__form{
         border-radius: 15px;
