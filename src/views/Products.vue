@@ -1,11 +1,6 @@
 <template>
     <div class="contenedor">
-<!--         <b-input-group class="mt-3 w-50 ms-auto p-4">
-            <b-form-input v-on:keyup.enter="searchData" v-model="search"></b-form-input>
-            <b-input-group-append>
-                <b-button variant="outline-success" v-on:click="searchData">Search</b-button>
-            </b-input-group-append>
-        </b-input-group> -->
+        <router-link to="/admin" variant="primary">Add New Product</router-link>
         <div class="contenedor__producto">
             <div v-for="item in data" :key="item._id" class="contenedor__producto--card">
                 <Card :item="item" />
@@ -40,13 +35,22 @@ export default {
 
 <style lang="scss" scoped>
 .contenedor{
-   
+    padding: 1.5%;
+
+    a{
+        text-decoration: none;
+        border-radius: 5px;
+        padding: 1%;
+        color: #fff;
+        background: #0275d8;
+    }
 
     &__producto{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around; 
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around; 
+        margin-top: 1%;
     }
 }
 

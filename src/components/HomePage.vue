@@ -1,12 +1,12 @@
 <template>
   <div class="contenedor">
     <div class="contenedor__img">
-      <img src="../assets/Negro.png" alt="logo" width="800px">
+      <img src="../assets/Negro.png" alt="logo" class="contenedor__img--logo">
     </div>
     <div class="contenedor__text">
-      <h1>We help you<br>to boost your<br>business</h1>
-      <p>Use content and social media marketing to your advantage</p>
-      <b-button href="#" variant="primary">Get Started</b-button>
+      <h1 class="mb-3">We help you<br>to boost your<br>business</h1>
+      <p class="mb-4">Use content and social media<br> marketing to your advantage</p>
+      <router-link to="/register" variant="primary">Get Started</router-link>
     </div>
 
   </div>
@@ -30,8 +30,22 @@ export default {
   justify-content: space-around;
   margin: 3%;
 
+  &__img--logo{
+    max-width: 800px;
+    width: 100%;
+    margin-top: 20px;
+  }
+
   &__text{
     padding: 2%;
+    margin-top: 80px;
+    a {
+        text-decoration: none;
+        border-radius: 5px;
+        padding: 4%;
+        color: #fff;
+        background: #0275d8;
+    }
   }
 }
 </style>
