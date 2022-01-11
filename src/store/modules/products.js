@@ -2,7 +2,8 @@ export default {
     namespaced: true,
     state: {
         products: null,
-        newProduct: null
+        newProduct: null,
+        deleteProduct: null
     },
     mutations: {
       setProducts(state, payload){
@@ -10,6 +11,9 @@ export default {
       },
       setNewProduct(state, payload){
           state.newProduct = payload
+      },
+      setDeleteProduct(state, payload){
+          state.deleteProduct = payload
       }
     },
     actions: {
@@ -42,6 +46,20 @@ export default {
             alert('Registro fallido')
             console.log(error)
         }
-    }
+    },
+    async deleteProduct({commit}, id){
+        try {
+            const res = await fetch(`https://hack-app-a.herokuapp.com/api/v1/products/${id}`, {
+                method: 'DELETE'
+            })
+            const resp = await res.json()
+            commit('setDeleteProduct', resp)
+            alert('Registro borrado')
+
+        } catch (error) {
+            alert('Operacion fallida')
+            console.log(error)
+        }
+    },
     }
   };

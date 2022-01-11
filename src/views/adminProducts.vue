@@ -1,7 +1,7 @@
 <template>
     <div class="contenedor">
         <h1 class="mb-4">Registrar nuevo producto</h1>
-        <div class="contenedor__form">
+        <div class="contenedor__form mb-5">
             <b-form @submit.prevent="saveProduct">
                 <b-form-group
                     id="input-group-1"
@@ -67,7 +67,12 @@
             </b-form>
         </div>
         <div class="contenedor__table">
-            <b-table striped hover :items="items" ></b-table>
+            <b-table sticky-header striped hover :fields="fields" :items="items" >
+                <template v-slot:cell(acciones)="row">
+                    <b-button variant="primary" class="m-2" @click="editar(row.index)">editar</b-button>
+                    <b-button variant="danger" class="m-2" @click="eliminar(row.index)">eliminar</b-button>
+                </template>
+            </b-table>
         </div>
     </div>
 </template>
@@ -77,6 +82,7 @@
     data() {
       return {
         items: [],
+        fields: ['_id','nombre',{key:'valor', label: 'valor', sortable:true},'calificacion','acciones'],
         producto: {
             imagen: null,
             nombre: null,
@@ -106,6 +112,14 @@
         async getProducts(){
             let response = await this.$store.dispatch("products/getProducts");
             this.items = response
+        },
+        editar(index){
+            console.log(this.items[index]._id)
+        },
+        async eliminar(index){
+            const id = this.items[index]._id
+            await this.$store.dispatch("products/deleteProduct", id);
+            this.$router.go(0)
         }
     },
     created(){
@@ -126,6 +140,5 @@
         border-radius: 5px;
         margin: 0 auto;
     }
-
 }
 </style>

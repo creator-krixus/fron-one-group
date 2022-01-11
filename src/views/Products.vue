@@ -1,6 +1,6 @@
 <template>
     <div class="contenedor">
-        <router-link to="/admin" variant="primary">Add New Product</router-link>
+        <router-link to="/admin" variant="primary">Administrar Productos</router-link>
         <div class="contenedor__producto">
             <div v-for="item in data" :key="item._id" class="contenedor__producto--card">
                 <Card :item="item" />
