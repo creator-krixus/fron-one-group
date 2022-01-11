@@ -63,14 +63,15 @@
                 </b-form-group>
 
 
-                <b-button type="submit" variant="primary" >Save</b-button>
+                <b-button type="submit" variant="primary" v-if="showSave">Guardar</b-button>
+                <b-button type="submit" variant="primary" v-if="showEdit" @click.prevent="guardarCambios">Guardar cambios</b-button>
             </b-form>
         </div>
         <div class="contenedor__table">
             <b-table sticky-header striped hover :fields="fields" :items="items" >
                 <template v-slot:cell(acciones)="row">
-                    <b-button variant="primary" class="m-2" @click="editar(row.index)">editar</b-button>
-                    <b-button variant="danger" class="m-2" @click="eliminar(row.index)">eliminar</b-button>
+                    <b-button variant="primary" class="m-2" @click="editar(row.index)">Editar</b-button>
+                    <b-button variant="danger" class="m-2" @click="eliminar(row.index)">Eliminar</b-button>
                 </template>
             </b-table>
         </div>
@@ -81,6 +82,9 @@
   export default {
     data() {
       return {
+        showSave: true,
+        showEdit: false,
+        id_producto: null,  
         items: [],
         fields: ['_id','nombre',{key:'valor', label: 'valor', sortable:true},'calificacion','acciones'],
         producto: {
@@ -108,13 +112,27 @@
                 calificacion: this.producto.calificacion
             }     
             await this.$store.dispatch("products/registerProduct", this.producto);
+            this.$router.go(0)
         },
         async getProducts(){
             let response = await this.$store.dispatch("products/getProducts");
             this.items = response
         },
         editar(index){
-            console.log(this.items[index]._id)
+            this.producto = {
+                imagen: this.items[index].imagen,
+                nombre: this.items[index].nombre,
+                valor: parseInt(this.items[index].valor),
+                calificacion: this.items[index].calificacion
+            }
+            this.id_producto = this.items[index]._id
+            this.showSave = false,
+            this.showEdit = true
+        },
+        async guardarCambios(){
+            const payload = {'id': this.id_producto, 'producto': this.producto}
+            await this.$store.dispatch("products/editarProduct", payload);
+            this.$router.go(0)
         },
         async eliminar(index){
             const id = this.items[index]._id
