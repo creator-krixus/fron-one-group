@@ -80,7 +80,6 @@ export default {
             const resp = await res.json()
             commit('setEditProduct', resp)
             console.log(resp)
-            
         } catch (error) {
             console.log(error)
         }

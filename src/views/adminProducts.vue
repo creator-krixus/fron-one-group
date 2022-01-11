@@ -112,7 +112,7 @@
                 calificacion: this.producto.calificacion
             }     
             await this.$store.dispatch("products/registerProduct", this.producto);
-            this.$router.go(0)
+            
         },
         async getProducts(){
             let response = await this.$store.dispatch("products/getProducts");
@@ -132,12 +132,12 @@
         async guardarCambios(){
             const payload = {'id': this.id_producto, 'producto': this.producto}
             await this.$store.dispatch("products/editarProduct", payload);
-            this.$router.go(0)
+            
         },
         async eliminar(index){
             const id = this.items[index]._id
             await this.$store.dispatch("products/deleteProduct", id);
-            this.$router.go(0)
+            
         }
     },
     created(){
