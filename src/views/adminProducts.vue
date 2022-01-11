@@ -1,6 +1,7 @@
 <template>
     <div class="contenedor">
-        <h1 class="mb-4">Registrar nuevo producto</h1>
+        <h1 class="mb-4" v-if="showSave">Registrar nuevo producto</h1>
+        <h1 class="mb-4" v-if="showEdit">Editar producto</h1>
         <div class="contenedor__form mb-5">
             <b-form @submit.prevent="saveProduct">
                 <b-form-group
@@ -86,7 +87,7 @@
         showEdit: false,
         id_producto: null,  
         items: [],
-        fields: ['_id','nombre',{key:'valor', label: 'valor', sortable:true},'calificacion','acciones'],
+        fields: ['_id','nombre','valor','calificacion','acciones'],
         producto: {
             imagen: null,
             nombre: null,
