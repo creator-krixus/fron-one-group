@@ -24,14 +24,29 @@ const routes = [
   {
     path: '/productos',
     name: 'Products', 
-    component: () => import('../views/Products.vue')
+    component: () => import('../views/Products.vue'),
+    beforeEnter: (to, from, next) => {
+      if(store.state.token == null){
+        next({name: "Login"})
+      }else{
+        next()
+      }
+    }
   },
   {
     path: '/admin',
     name: 'adminProducts', 
-    component: () => import('../views/adminProducts.vue')
+    component: () => import('../views/adminProducts.vue'),
+    beforeEnter: (to, from, next) => {
+      if(store.state.token == null){
+        next({name: "Login"})
+      }else{
+        next()
+      }
+    }
   },
 ]
+
 
 
 const router = new VueRouter({
